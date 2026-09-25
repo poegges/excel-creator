@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Excel Creator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Excel Creator</h1>
+        <p class="muted">Describe the spreadsheet you want - type it or say it - and Claude builds it.</p>
+      </header>
+
+      <section class="card">
+        <label for="prompt" class="label">What should the spreadsheet contain?</label>
+        <textarea
+          id="prompt"
+          rows="5"
+          placeholder="e.g. A monthly household budget with income and expense categories, planned vs. actual columns, the difference, and a totals row. Highlight overspending in red."
+        ></textarea>
+
+        <div class="controls">
+          <button id="mic" type="button" class="secondary" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span id="mic-label">Speak</span>
+          </button>
+          <select id="lang" aria-label="Speech language">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="fr-FR">Français</option>
+            <option value="es-ES">Español</option>
+            <option value="it-IT">Italiano</option>
+            <option value="nl-NL">Nederlands</option>
+            <option value="pt-BR">Português (BR)</option>
+          </select>
+          <label class="toggle" id="refine-wrap" hidden>
+            <input type="checkbox" id="refine" checked /> Modify current workbook
+          </label>
+          <span class="spacer"></span>
+          <button id="clear" type="button" class="secondary">Clear</button>
+          <button id="generate" type="button" class="primary">Create spreadsheet</button>
+        </div>
+        <p id="speech-status" class="muted small" hidden></p>
+        <p class="muted small">Tip: press Ctrl+Enter to submit.</p>
+      </section>
+
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <section id="result" class="card" hidden>
+        <div class="result-head">
+          <div>
+            <h2 id="result-title"></h2>
+            <p id="result-summary" class="muted"></p>
+          </div>
+          <button id="download" type="button" class="primary">Download .xlsx</button>
+        </div>
+        <div id="tabs" class="tabs" role="tablist"></div>
+        <div class="table-wrap"><table id="preview"></table></div>
+      </section>
+
+      <section id="history-wrap" class="card" hidden>
+        <h3>Prompt history</h3>
+        <ol id="history"></ol>
+      </section>
+    </main>
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
